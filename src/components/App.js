@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import './../styles/App.css';
 
 const App = () => {
-    const cityList = [{ name: 'Goa', country: 'India' },
+    const citiesList = [{ name: 'Goa', country: 'India' },
     { name: 'Amsterdam', country: 'Netherlands' },
     { name: 'New York', country: 'USA' },
     { name: 'Darjeeling', country: 'India' },
@@ -32,10 +31,27 @@ const App = () => {
     { name: 'Mount Abu', country: 'India' },
     { name: 'Tirupati', country: 'India' },
     ]
+    const [cities, setCities] = useState([]); 
+  
+    useEffect(() => {
+      let temp = [];
+      temp = citiesList.filter((el)=>el.country === 'India'
+      )
+
+      setCities([...temp])
+      
+    }, [])
+
+    //console.log("cities",cities);
+    
     
   return (
-    <div id="main">
-               {/* Do not remove the main div */}
+    <div>
+        <ol id='location'>
+        {cities.map((el,i)=>
+            <li id={`location${i+1}`} key={`location${i+1}`}>{el.name}</li>
+        )}
+        </ol>
     </div>
   )
 }
